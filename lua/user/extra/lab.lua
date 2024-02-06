@@ -12,6 +12,11 @@ function M.config()
       enabled = false,
     },
   }
+  local opts = { noremap = true, silent = true }
+  local keymap = vim.api.nvim_set_keymap
+
+  keymap("n", "<m-t>", "<cmd>:Lab code run<cr>", opts)
+  keymap("n", "<m-y>", ":Lab code stop<cr>", opts)
 end
 
 return M
