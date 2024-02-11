@@ -1,5 +1,4 @@
 local M = {
-  -- "LunarVim/darkplus.nvim",
   "catppuccin/nvim",
   name = "catppuccin",
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -11,7 +10,7 @@ local M = {
         light = "latte",
         dark = "mocha",
       },
-      transparent_background = true, -- disables setting the background color.
+      transparent_background = false, -- disables setting the background color.
       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
       dim_inactive = {
@@ -53,9 +52,4 @@ local M = {
     vim.cmd.colorscheme "catppuccin"
   end,
 }
-
--- function M.config()
---   vim.cmd.colorscheme "catppuccin"
--- end
-
 return M

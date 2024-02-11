@@ -125,16 +125,16 @@ function M.config()
           vim_item.kind_hl_group = "CmpItemKindEmoji"
         end
 
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
+        -- if entry.source.name == "cmp_tabnine" then
+        --   vim_item.kind = icons.misc.Robot
+        --   vim_item.kind_hl_group = "CmpItemKindTabnine"
+        -- end
 
         return vim_item
       end,
     },
     sources = {
-      { name = "copilot" },
+      -- { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
@@ -146,7 +146,7 @@ function M.config()
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     window = {
       completion = {
@@ -158,7 +158,7 @@ function M.config()
       },
     },
     experimental = {
-      ghost_text = true,
+      ghost_text = false,
     },
   }
 end

@@ -14,9 +14,9 @@ function M.config()
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { "branch", "diff", "filename" },
+      lualine_b = { "branch", "filename" },
       lualine_c = { "diagnostics" },
-      lualine_x = { "tabnine", "fileformat", "filetype" },
+      lualine_x = { "fileformat", "filetype" },
       lualine_y = { "progress" },
       lualine_z = {
         {

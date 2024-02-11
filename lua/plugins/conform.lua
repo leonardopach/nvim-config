@@ -1,9 +1,8 @@
 local M = {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
   lazy = true,
   event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this output
 }
-
 
 function M.config()
   local conform = require "conform"
@@ -23,7 +22,7 @@ function M.config()
     },
     format_on_save = {
       -- I recommend these options. See :help conform.format for details.
-      pattern = ".lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.rs,",
+      -- pattern = ".lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.rs,",
       lsp_fallback = true,
       timeout_ms = 500,
     },
