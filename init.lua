@@ -28,6 +28,8 @@ spec "plugins.neogit"
 spec "plugins.project"
 spec "plugins.indentline"
 spec "plugins.toggleterm"
+spec "plugins.debbug"
+spec "plugins.tmux"
 -- extra
 -- spec "plugins.extra.copilot"
 spec "plugins.extra.neoscroll"

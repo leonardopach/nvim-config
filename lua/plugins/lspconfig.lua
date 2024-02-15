@@ -6,9 +6,6 @@ local M = {
       "folke/neodev.nvim",
     },
   },
-  inlay_hints = {
-    enabled = true,
-  },
 }
 
 local function lsp_keymaps(bufnr)
@@ -27,6 +24,7 @@ M.on_attach = function(client, bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+    -- vim.lsp.inlay_hint.enable(bufnr, true)
   end
 end
 
@@ -40,7 +38,6 @@ M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
 end
-
 function M.config()
   local wk = require "which-key"
   wk.register {
@@ -49,9 +46,10 @@ function M.config()
       "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
       "Format",
     },
+    ["<leader>ln"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostic Float" },
     ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
     ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    ["<leader>lh"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
+    ["<leader>lh"] = { "<cmd>lua require('plugins.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
     ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
     ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
@@ -91,7 +89,7 @@ function M.config()
         { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
       },
     },
-    virtual_text = true,
+    virtual_text = false,
     update_in_insert = false,
     underline = true,
     severity_sort = true,
@@ -121,7 +119,7 @@ function M.config()
       capabilities = M.common_capabilities(),
     }
 
-    local require_ok, settings = pcall(require, "user.lspsettings." .. server)
+    local require_ok, settings = pcall(require, "plugins.lspsettings." .. server)
     if require_ok then
       opts = vim.tbl_deep_extend("force", settings, opts)
     end
