@@ -21,8 +21,7 @@ function M.config()
       markdown = { "prettierd" },
     },
     format_on_save = {
-      -- I recommend these options. See :help conform.format for details.
-      -- pattern = ".lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.rs,",
+      pattern = ".lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.rs,",
       lsp_fallback = true,
       timeout_ms = 500,
     },
