@@ -28,16 +28,20 @@ function M.config()
   require("mason-lspconfig").setup {
     ensure_installed = servers,
   }
-  require("mason-tool-installer").setup({
-			ensure_installed = {
-				"lua-language-server",
-				"stylua",
-				"eslint_d",
-				"prettierd",
-				"rust-analyzer",
-				"bash-language-server",
-			},
-		})
+  require("mason-tool-installer").setup {
+    ensure_installed = {
+      "lua-language-server",
+      "stylua",
+      "eslint_d",
+      "prettierd",
+      "rust-analyzer",
+      "bash-language-server",
+      "typescript-language-server",
+      "eslint-lsp",
+      "js-debug-adapter",
+      "prettier",
+    },
+  }
 end
 
 return M
