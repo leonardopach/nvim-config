@@ -30,6 +30,7 @@ M.mason = {
     "lua-language-server",
     "html-lsp",
     "prettier",
+    "rust-analyzer",
     "emmet-ls",
     "stylua",
     "eslint-lsp",
