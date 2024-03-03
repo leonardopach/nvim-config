@@ -5,9 +5,7 @@ local capabilities = configs.capabilities
 local lspconfig = require "lspconfig"
 local servers = {
   "cssls",
-  "emmet_ls",
   "tailwindcss",
-  "html",
   "clangd",
   "eslint",
   "rust_analyzer",

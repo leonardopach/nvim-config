@@ -6,6 +6,7 @@ plugin.setup {
     c = { "clang-format" },
     javascript = { "prettier" },
     typescript = { "prettier" },
+    rust = { "rust_analyzer" },
     javascriptreact = { "prettier" },
     typescriptreact = { "prettier" },
     css = { "prettier" },
