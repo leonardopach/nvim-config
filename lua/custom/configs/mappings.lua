@@ -68,6 +68,9 @@ M.incRename = {
   n = {
     ["<leader>rn"] = { ":IncRename ", "Lsp renaming" },
   },
+  v = {
+    ["<leader>rn"] = { ":IncRename ", "Lsp renaming" },
+  },
 }
 
 M.neotest = {

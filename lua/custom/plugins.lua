@@ -1,6 +1,22 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
-
+  --bqf
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.bqf"
+    end,
+  },
+  -- modificato
+  {
+    "mawkler/modicator.nvim",
+    event = "BufEnter",
+    lazy = "false",
+    config = function()
+      require "custom.configs.modicator"
+    end,
+  },
   -- gitlinker
   {
     "linrongbin16/gitlinker.nvim",

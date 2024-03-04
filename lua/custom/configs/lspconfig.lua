@@ -4,7 +4,6 @@ local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
 local servers = {
-  "cssls",
   "tailwindcss",
   "clangd",
   "eslint",
@@ -66,6 +65,16 @@ lspconfig.tsserver.setup {
     },
   },
 }
+lspconfig.cssls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 for _, lsp in pairs(servers) do
   local opts = {
     on_attach = on_attach,

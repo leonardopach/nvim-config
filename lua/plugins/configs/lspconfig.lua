@@ -52,7 +52,6 @@ local servers = {
   "lua_ls",
   "jsonls",
   "emmet_ls",
-  "html",
 }
 
 for _, server in pairs(servers) do

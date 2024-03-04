@@ -15,6 +15,7 @@ opt.wrap = false
 opt.backspace = { "start", "eol", "indent" }
 opt.path:append { "**" }
 opt.wildignore:append { "*/node_modules/*" }
+opt.termguicolors = true
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
@@ -44,7 +45,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 400
-opt.undofile = true
+opt.undofile = false
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
