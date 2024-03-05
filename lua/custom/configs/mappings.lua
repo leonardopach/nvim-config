@@ -15,6 +15,7 @@ M.general = {
     ["<s-l>"] = { "g_", "jump end" },
     ["<leader>an"] = { "<cmd>$tabnew<cr>", "New Empty Tab" },
     ["<tab>"] = { "<cmd>tabNext<cr>", "Next Tab" },
+    ["<c-t>"] = { ":TodoTelescope<cr>", "Todo Telescope" },
   },
   i = {
     ["<c-a>"] = { "ggVG", "Select All" },
@@ -90,6 +91,33 @@ M.telescope_file = {
     ["<leader>fh"] = {
       "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
       "open with the path of current buffer",
+    },
+    ["<leader>f?"] = {
+      function()
+        require("telescope.builtin").help_tags()
+      end,
+      "Helps Tags",
+    },
+    ["<leader>fd"] = {
+      function()
+        require("telescope.builtin").lsp_definitions()
+      end,
+      "Goto Definitions",
+    },
+    ["<leader>fr"] = {
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      "Goto References",
+    },
+    ["<leader>f/"] = {
+      function()
+        require("telescope.builtin").live_grep {
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        }
+      end,
+      "[S]earch [/] in Open Files",
     },
   },
 }

@@ -240,6 +240,18 @@ local default_plugins = {
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
+      require("which-key").register {
+        ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+        ["<leader>d"] = { name = "[D]ebbug", _ = "which_key_ignore" },
+        ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+        ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+        ["<leader>a"] = { name = "[T]ab", _ = "which_key_ignore" },
+        ["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
+        ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
+        ["<leader>t"] = { name = "[T]est", _ = "which_key_ignore" },
+        ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
+        ["<c-t>"] = { name = "[T]odo", _ = "which_key_ignore" },
+      }
     end,
   },
 }

@@ -1,5 +1,18 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+  -- TODO: comment
+  -- FIX: aqui
+  -- HACK: aqui
+  {
+    "folke/todo-comments.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
+
+  {
+    "tpope/vim-sleuth", -- Detect tabstop and shiftwidth
+  },
   --bqf
   {
     "kevinhwang91/nvim-bqf",
@@ -168,7 +181,6 @@ local plugins = {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
@@ -185,7 +197,6 @@ local plugins = {
   -- Mason
   {
     "williamboman/mason.nvim",
-    lazy = false,
     opts = overrides.mason,
     dependencies = {
       {
