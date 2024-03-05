@@ -10,7 +10,7 @@ g.transparency = config.ui.transparency
 
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
-opt.showmode = true
+opt.showmode = false
 opt.wrap = false
 opt.backspace = { "start", "eol", "indent" }
 opt.path:append { "**" }
