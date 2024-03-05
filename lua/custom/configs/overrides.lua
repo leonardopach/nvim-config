@@ -35,6 +35,7 @@ M.mason = {
     "stylua",
     "eslint-lsp",
     "js-debug-adapter",
+    "json-lsp",
     "tailwindcss-language-server",
     "typescript-language-server",
   },
