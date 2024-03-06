@@ -24,6 +24,7 @@ local function organize_imports()
 end
 
 local icons = require "custom.configs.icons"
+
 local default_diagnostic_config = {
   signs = {
     active = true,
@@ -34,13 +35,15 @@ local default_diagnostic_config = {
       { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
     },
   },
-  virtual_text = false,
+  virtual_text = {
+    source = "always",
+    prefix = "●",
+  },
   update_in_insert = false,
   underline = true,
   severity_sort = true,
   float = {
-    focusable = true,
-    style = "minimal",
+    focusable = false,
     border = "rounded",
     source = "always",
     header = "",

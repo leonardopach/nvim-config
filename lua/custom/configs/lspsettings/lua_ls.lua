@@ -3,7 +3,7 @@ return {
   settings = {
     Lua = {
       format = {
-        enable = true,
+        enable = false,
       },
       diagnostics = {
         globals = { "vim" },
@@ -23,7 +23,7 @@ return {
         },
       },
       hint = {
-        enable = false,
+        enable = true,
         arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
         await = true,
         paramName = "All", -- "All" | "Literal" | "Disable"

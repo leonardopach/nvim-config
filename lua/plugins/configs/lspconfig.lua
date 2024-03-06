@@ -3,7 +3,6 @@ require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
-
 -- export on_attach & capabilities for custom lspconfigs
 
 M.on_attach = function(client, bufnr)
@@ -11,6 +10,7 @@ M.on_attach = function(client, bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+    -- vim.lsp.inlay_hint.enable(bufnr, true)
   end
 
   if client.server_capabilities.signatureHelpProvider then
@@ -21,12 +21,10 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = nil
   end
 end
-
 M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
 end
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 M.capabilities.textDocument.completion.completionItem = {
