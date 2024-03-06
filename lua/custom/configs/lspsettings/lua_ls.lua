@@ -18,8 +18,8 @@ return {
           [vim.fn.stdpath "config" .. "/lua"] = true,
           [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
           [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-          "${3rd}/luv/library",
-          unpack(vim.api.nvim_get_runtime_file("", true)),
+          -- "${3rd}/luv/library",
+          -- unpack(vim.api.nvim_get_runtime_file("", true)),
         },
       },
       hint = {

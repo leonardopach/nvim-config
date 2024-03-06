@@ -7,18 +7,25 @@ g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
+g.matchparen_timeout = 20
+g.matchparen_insert_timeout = 20
 
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 opt.wrap = false
+opt.swapfile = false
+opt.backup = false
 opt.backspace = { "start", "eol", "indent" }
 opt.path:append { "**" }
 opt.wildignore:append { "*/node_modules/*" }
 opt.termguicolors = true
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
+opt.guifont = "FiraCode:h17"
 
 -- Indenting
 opt.expandtab = true

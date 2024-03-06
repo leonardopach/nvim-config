@@ -1,5 +1,16 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require "custom.configs.noice"
+    end,
+  },
 
   -- TODO: comment
   -- FIX: aqui
@@ -280,15 +291,6 @@ local plugins = {
     config = function()
       require "custom.configs.neotest"
       require("core.utils").load_mappings "neotest"
-    end,
-  },
-
-  -- fidget
-  {
-    "j-hui/fidget.nvim",
-    lazy = false,
-    config = function()
-      require "custom.configs.fidget"
     end,
   },
 }
