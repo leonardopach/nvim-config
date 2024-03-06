@@ -119,6 +119,7 @@ M.telescope_file = {
       end,
       "[S]earch [/] in Open Files",
     },
+    ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
   },
 }
 
