@@ -7,6 +7,7 @@ local servers = {
   "tailwindcss",
   "clangd",
   "eslint",
+  -- "tsserver",
   "rust_analyzer",
   "tailwindcss",
   "pyright",
@@ -23,51 +24,23 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
-local icons = require "custom.configs.icons"
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   init_options = {
+--     preferences = {
+--       disableSuggestions = false,
+--     },
+--   },
+--   commands = {
+--     OrganizeImports = {
+--       organize_imports,
+--       description = "Organize Imports",
+--     },
+--   },
+-- }
+--
 
-local default_diagnostic_config = {
-  signs = {
-    active = true,
-    values = {
-      { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-      { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-      { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-      { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
-    },
-  },
-  virtual_text = {
-    source = "always",
-    prefix = "●",
-  },
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
-  },
-}
-
-vim.diagnostic.config(default_diagnostic_config)
-
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  init_options = {
-    preferences = {
-      disableSuggestions = false,
-    },
-  },
-  commands = {
-    OrganizeImports = {
-      organize_imports,
-      description = "Organize Imports",
-    },
-  },
-}
 lspconfig.cssls.setup {
   on_attach = on_attach,
   capabilities = capabilities,

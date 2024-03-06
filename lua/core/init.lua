@@ -9,7 +9,6 @@ g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
 g.matchparen_timeout = 20
 g.matchparen_insert_timeout = 20
-
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false

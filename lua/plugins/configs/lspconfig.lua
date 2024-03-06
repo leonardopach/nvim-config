@@ -3,47 +3,66 @@ require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
--- export on_attach & capabilities for custom lspconfigs
 
+-- export on_attach & capabilities for custom lspconfigs
 M.on_attach = function(client, bufnr)
   utils.load_mappings("lspconfig", { buffer = bufnr })
-
-  if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
-    -- vim.lsp.inlay_hint.enable(bufnr, true)
-  end
 
   if client.server_capabilities.signatureHelpProvider then
     require("nvchad.signature").setup(client)
   end
 
-  if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
-    client.server_capabilities.semanticTokensProvider = nil
+  if client.supports_method "textDocument/inlayHint" then
+    vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+    vim.api.nvim_set_hl(0, "LSPInlayHint", { fg = "grey" })
   end
 end
 M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
 end
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
-M.capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+-- disable semantic tokens
+M.on_init = function(client, _)
+  if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+end
+function M.common_capabilities()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
     },
-  },
-}
+  }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  return capabilities
+end
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+require("lspconfig.ui.windows").default_options.border = "rounded"
 
 local lspconfig = require "lspconfig"
 local servers = {
@@ -69,49 +88,5 @@ for _, server in pairs(servers) do
 
   lspconfig[server].setup(opts)
 end
--- require("lspconfig").lua_ls.setup {
---   on_attach = M.on_attach,
---   capabilities = M.capabilities,
---
---   settings = {
---     Lua = {
---       format = {
---         enable = true,
---       },
---       diagnostics = {
---         globals = { "vim" },
---       },
---       runtime = {
---         version = "LuaJIT",
---         special = {
---           spec = "require",
---         },
---       },
---       workspace = {
---         library = {
---           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
---           [vim.fn.stdpath "config" .. "/lua"] = true,
---           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
---           [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
---           [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
---         },
---         -- maxPreload = 100000,
---         -- preloadFileSize = 10000,
---       },
---       hint = {
---         enable = true,
---         arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
---         await = true,
---         paramName = "All", -- "All" | "Literal" | "Disable"
---         paramType = true,
---         semicolon = "All", -- "All" | "SameLine" | "Disable"
---         setType = true,
---       },
---       telemetry = {
---         enable = false,
---       },
---     },
---   },
--- }
---
+
 return M

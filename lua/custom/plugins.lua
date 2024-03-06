@@ -1,5 +1,20 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require "custom.configs.typescript"
+    end,
+  },
+  -- diffview
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+  },
+  -- Noice
   {
     "folke/noice.nvim",
     event = "VeryLazy",
