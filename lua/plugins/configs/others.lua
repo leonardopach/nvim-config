@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 M.luasnip = function(opts)
   require("luasnip").config.set_config(opts)
+  require("luasnip").filetype_extend("typescriptreact", { "html" })
 
   -- vscode format
   require("luasnip.loaders.from_vscode").lazy_load()

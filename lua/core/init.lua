@@ -25,6 +25,12 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.guifont = "FiraCode:h17"
+opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
+opt.conceallevel = 0 -- so that `` is visible in markdown files
+opt.relativenumber = true
+opt.sidescrolloff = 8
+vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd [[set iskeyword+=-]]
 
 -- Indenting
 opt.expandtab = true

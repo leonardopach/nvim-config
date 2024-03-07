@@ -14,9 +14,30 @@ local formatting_style = {
   -- default fields order i.e completion word + item.kind + item.kind icons
   fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
 
-  format = function(_, item)
+  format = function(entry, item)
     local icons = require "nvchad.icons.lspkind"
     local icon = (cmp_ui.icons and icons[item.kind]) or ""
+    item.menu = ({
+      nvim_lsp = "",
+      nvim_lua = "",
+      luasnip = "",
+      buffer = "",
+      path = "",
+      emoji = "",
+    })[entry.source.name]
+
+    if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
+      local duplicates = {
+        buffer = 1,
+        path = 1,
+        nvim_lsp = 0,
+        luasnip = 1,
+      }
+
+      local duplicates_default = 0
+
+      item.dup = duplicates[entry.source.name] or duplicates_default
+    end
 
     if cmp_style == "atom" or cmp_style == "atom_colored" then
       icon = " " .. icon .. " "
@@ -49,23 +70,22 @@ local options = {
     completeopt = "menu,menuone",
   },
 
-  window = {
-    completion = {
-      side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
-      winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-      scrollbar = false,
-    },
-    documentation = {
-      border = border "CmpDocBorder",
-      winhighlight = "Normal:CmpDoc",
-    },
-  },
+  -- window = {
+  --   completion = {
+  --     side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
+  --     winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+  --     scrollbar = false,
+  --   },
+  --   documentation = {
+  --     border = border "CmpDocBorder",
+  --     winhighlight = "Normal:CmpDoc",
+  --   },
+  -- },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
   },
-
   formatting = formatting_style,
 
   mapping = {
@@ -105,16 +125,43 @@ local options = {
     }),
   },
   sources = {
-    { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "nvim_lua" },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
     { name = "emoji" },
+    { name = "calc" },
+    { name = "treesitter" },
+    { name = "crates" },
+    { name = "tmux" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
+  },
+  view = {
+    entries = {
+      name = "custom",
+      selection_order = "top_down",
+    },
+    docs = {
+      auto_open = true,
+    },
+  },
+  window = {
+    completion = {
+      border = "rounded",
+      winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+      col_offset = -3,
+      side_padding = 1,
+      scrollbar = false,
+      scrolloff = 8,
+    },
+    documentation = {
+      border = "rounded",
+      winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
+    },
   },
   experimental = {
     ghost_text = true,

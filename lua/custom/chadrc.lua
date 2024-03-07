@@ -3,7 +3,7 @@ local M = {}
 M.ui = {
   theme = "catppuccin",
   transparency = false,
-  lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
+  lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
   extended_integrations = { "notify" }, -- these aren't compiled by default, ex: "alpha", "notify"
@@ -11,7 +11,7 @@ M.ui = {
   cmp = {
     icons = true,
     lspkind_text = true,
-    style = "atom", -- default/flat_light/flat_dark/atom/atom_colored
+    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
     border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },

@@ -1,6 +1,38 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
 
+  -- tailwindcss
+  {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    -- optionally, override the default options:
+    config = function()
+      require("tailwindcss-colorizer-cmp").setup {
+        color_square_width = 2,
+      }
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require "custom.configs.autotag"
+    end,
+  },
+
+  -- netrw
+  {
+    "prichrd/netrw.nvim",
+    lazy = false,
+    config = function()
+      require "custom.configs.netrw"
+    end,
+  },
+  -- Auto indent jsx
+  {
+    "tpope/vim-sleuth",
+    "MaxMEllon/vim-jsx-pretty",
+  },
+  -- typescript-tools
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

@@ -20,6 +20,9 @@ M.general = {
   i = {
     ["<c-a>"] = { "ggVG", "Select All" },
   },
+  x = {
+    ["p"] = { [["_dP]], "Copy" },
+  },
 }
 
 M.tmux = {
