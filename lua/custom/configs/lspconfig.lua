@@ -8,7 +8,7 @@ local servers = {
   "clangd",
   "eslint",
   -- "tsserver",
-  "rust_analyzer",
+  -- "rust_analyzer",
   "tailwindcss",
   "pyright",
   "bashls",

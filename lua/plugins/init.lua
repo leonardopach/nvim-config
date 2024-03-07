@@ -250,6 +250,7 @@ local default_plugins = {
         ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
         ["<leader>t"] = { name = "[T]est", _ = "which_key_ignore" },
         ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
+        ["<leader>l"] = { name = "[T]rouble", _ = "which_key_ignore" },
         ["<c-t>"] = { name = "[T]odo", _ = "which_key_ignore" },
       }
     end,

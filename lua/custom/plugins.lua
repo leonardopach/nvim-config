@@ -1,6 +1,26 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
-
+  -- rust
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^3",
+    ft = { "rust" },
+    config = function()
+      require "custom.configs.rustacean"
+    end,
+  },
+  --tsc
+  {
+    "dmmulroy/tsc.nvim",
+  },
+  -- trouble
+  {
+    "folke/trouble.nvim",
+    lazy = false,
+    config = function()
+      require("core.utils").load_mappings "trouble"
+    end,
+  },
   -- tailwindcss
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
@@ -11,7 +31,7 @@ local plugins = {
       }
     end,
   },
-
+  -- auto tag
   {
     "windwp/nvim-ts-autotag",
     config = function()
@@ -45,6 +65,9 @@ local plugins = {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    config = function()
+      require "custom.configs.diffview"
+    end,
   },
   -- Noice
   {
@@ -66,7 +89,9 @@ local plugins = {
     "folke/todo-comments.nvim",
     event = "VimEnter",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { signs = false },
+    config = function()
+      require "custom.configs.todo"
+    end,
   },
 
   {

@@ -123,9 +123,15 @@ M.telescope_file = {
       "[S]earch [/] in Open Files",
     },
     ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
   },
 }
-
+M.trouble = {
+  n = {
+    ["<leader>ld"] = { "<cmd>Trouble<cr>", "Diagnostics" },
+    ["<leader>lt"] = { "<cmd>TodoTrouble<cr>", "TODO" },
+  },
+}
 M.codeRunner = {
   plugin = true,
   n = {
