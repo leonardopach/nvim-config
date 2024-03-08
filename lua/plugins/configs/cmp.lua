@@ -164,7 +164,7 @@ local options = {
     },
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
 }
 

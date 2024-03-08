@@ -158,4 +158,11 @@ M.gitlinker = {
     ["<leader>gY"] = { "<cmd>GitLink blame<cr>", "Git link blame" },
   },
 }
+
+M.mini_files = {
+  plugin = true,
+  n = {
+    ["<leader>mo"] = { "<cmd>lua MiniFiles.open()<cr>", "MiniFile" },
+  },
+}
 return M

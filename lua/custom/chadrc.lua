@@ -1,10 +1,17 @@
 local M = {}
 
+M.options = {
+  nvchad_branch = "v2.0",
+}
 M.ui = {
+  hl_add = {},
+  hl_override = {},
+  changed_themes = {},
+  theme_toggle = { "onedark", "one_light" },
   theme = "catppuccin",
   transparency = false,
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
-
+  -- TODO: hello moto
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
   extended_integrations = { "notify" }, -- these aren't compiled by default, ex: "alpha", "notify"
 
@@ -13,9 +20,9 @@ M.ui = {
     lspkind_text = true,
     style = "default", -- default/flat_light/flat_dark/atom/atom_colored
     border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
-    selected_item_bg = "colored", -- colored / simple
+    selected_item_bg = "simple", -- colored / simple
   },
-  telescope = { style = "borderless" }, -- borderless / bordered
+  telescope = { style = "bordered" }, -- borderless / bordered
 
   ------------------------------- nvchad_ui modules -----------------------------
   statusline = {

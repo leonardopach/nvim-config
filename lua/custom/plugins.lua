@@ -1,6 +1,32 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
 
+  {
+    "echasnovski/mini.notify",
+    version = false,
+    config = function()
+      require "custom.configs.notify"
+    end,
+  },
+  -- clue
+  {
+    "echasnovski/mini.clue",
+    version = false,
+    config = function()
+      require "custom.configs.miniclue"
+    end,
+  },
+  -- min vim
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function()
+      require "custom.configs.mini_files"
+      require("core.utils").load_mappings "mini_files"
+    end,
+  },
+  --mini surround
+  { "echasnovski/mini.surround", version = false, opts = {} },
   { "b0o/schemastore.nvim" },
   -- rust
   {
@@ -69,18 +95,6 @@ local plugins = {
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
     config = function()
       require "custom.configs.diffview"
-    end,
-  },
-  -- Noice
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require "custom.configs.noice"
     end,
   },
 
