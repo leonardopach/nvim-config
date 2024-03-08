@@ -19,9 +19,9 @@ require("diffview").setup {
     done = "✓",
   },
   keymaps = {
-    disable_defaults = true, -- Disable the default keymaps
+    disable_defaults = false, -- Disable the default keymaps
     view = {
-      ["<tab>"] = false,
+      -- ["<tab>"] = false,
     },
   },
 }

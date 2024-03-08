@@ -1,5 +1,7 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+
+  { "b0o/schemastore.nvim" },
   -- rust
   {
     "mrcjkb/rustaceanvim",
