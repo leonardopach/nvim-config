@@ -159,10 +159,4 @@ M.gitlinker = {
   },
 }
 
-M.mini_files = {
-  plugin = true,
-  n = {
-    ["<leader>mo"] = { "<cmd>lua MiniFiles.open()<cr>", "MiniFile" },
-  },
-}
 return M

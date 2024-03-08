@@ -1,6 +1,5 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
-
   {
     "echasnovski/mini.notify",
     version = false,
@@ -14,15 +13,6 @@ local plugins = {
     version = false,
     config = function()
       require "custom.configs.miniclue"
-    end,
-  },
-  -- min vim
-  {
-    "echasnovski/mini.nvim",
-    version = false,
-    config = function()
-      require "custom.configs.mini_files"
-      require("core.utils").load_mappings "mini_files"
     end,
   },
   --mini surround
