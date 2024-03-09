@@ -3,7 +3,11 @@ local plugins = {
   {
     "j-hui/fidget.nvim",
     opts = {
-      -- options
+      integration = {
+        ["nvim-tree"] = {
+          enable = true,
+        },
+      },
     },
   },
   -- mini
@@ -44,12 +48,7 @@ local plugins = {
   -- tailwindcss
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
-    -- optionally, override the default options:
-    config = function()
-      require("tailwindcss-colorizer-cmp").setup {
-        color_square_width = 2,
-      }
-    end,
+    lazy = false,
   },
   -- auto tag
   {

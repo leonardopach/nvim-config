@@ -1,7 +1,11 @@
 local cmp = require "cmp"
--- require("cmp").config.formatting = {
---   format = require("tailwindcss-colorizer-cmp").formatter,
--- }
+local luasnip = require "luasnip"
+
+require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip").filetype_extend("typescriptreact", { "html" })
+require("tailwindcss-colorizer-cmp").setup {
+  color_square_width = 2,
+}
 dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
@@ -11,6 +15,12 @@ local field_arrangement = {
   atom = { "kind", "abbr", "menu" },
   atom_colored = { "kind", "abbr", "menu" },
 }
+
+local check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
 local formatting_style = {
   -- default fields order i.e completion word + item.kind + item.kind icons
   fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
@@ -27,11 +37,6 @@ local formatting_style = {
       emoji = "",
     })[entry.source.name]
 
-    if entry.source.name == "emoji" then
-      item.kind = icons.Smiley
-      item.kind_hl_group = "CmpItemKindEmoji"
-    end
-
     if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
       local duplicates = {
         buffer = 1,
@@ -43,6 +48,15 @@ local formatting_style = {
       local duplicates_default = 0
 
       item.dup = duplicates[entry.source.name] or duplicates_default
+    end
+
+    if entry.source.name == "emoji" then
+      item.kind = icons.Smiley
+      item.kind_hl_group = "CmpItemKindEmoji"
+    end
+    if entry.source.name == "crates" then
+      item.kind = icons.misc.Package
+      item.kind_hl_group = "CmpItemKindCrate"
     end
 
     if cmp_style == "atom" or cmp_style == "atom_colored" then
@@ -89,7 +103,7 @@ local options = {
   -- },
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   formatting = formatting_style,
@@ -110,6 +124,9 @@ local options = {
         cmp.select_next_item()
       elseif require("luasnip").expand_or_jumpable() then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+      elseif check_backspace() then
+        fallback()
+        require("neotab").tabout()
       else
         fallback()
       end
@@ -133,7 +150,25 @@ local options = {
   sources = {
     { name = "luasnip" },
     { name = "nvim_lua" },
-    { name = "nvim_lsp" },
+    {
+      name = "nvim_lsp",
+      entry_filter = function(entry, ctx)
+        local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
+        if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+          return false
+        end
+
+        if ctx.prev_context.filetype == "markdown" then
+          return true
+        end
+
+        if kind == "Text" then
+          return false
+        end
+
+        return true
+      end,
+    },
     { name = "buffer" },
     { name = "path" },
     { name = "emoji" },

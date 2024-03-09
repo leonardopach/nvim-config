@@ -167,7 +167,9 @@ local default_plugins = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-emoji",
+        "hrsh7th/cmp-cmdline",
       },
+      event = "InsertEnter",
     },
     opts = function()
       return require "plugins.configs.cmp"
