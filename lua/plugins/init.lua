@@ -33,7 +33,11 @@ local default_plugins = {
     "NvChad/nvim-colorizer.lua",
     event = "User FilePost",
     config = function(_, opts)
-      require("colorizer").setup(opts)
+      require("colorizer").setup {
+        user_default_options = {
+          tailwind = true,
+        },
+      }
 
       -- execute colorizer as soon as possible
       vim.defer_fn(function()
@@ -209,10 +213,11 @@ local default_plugins = {
 
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope-file-browser.nvim" },
     cmd = "Telescope",
     init = function()
       require("core.utils").load_mappings "telescope"
+      require("core.utils").load_mappings "telescope_file"
     end,
     opts = function()
       return require "plugins.configs.telescope"
@@ -250,7 +255,7 @@ local default_plugins = {
         ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
         ["<leader>t"] = { name = "[T]est", _ = "which_key_ignore" },
         ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
-        ["<leader>l"] = { name = "[T]rouble", _ = "which_key_ignore" },
+        ["<leader>l"] = { name = "[L]sp", _ = "which_key_ignore" },
         ["<c-t>"] = { name = "[T]odo", _ = "which_key_ignore" },
       }
     end,

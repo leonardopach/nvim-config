@@ -165,28 +165,28 @@ M.lspconfig = {
       "LSP signature help",
     },
 
-    ["<lader>D"] = {
+    ["<lader>lD"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
       "LSP definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<leader>ln"] = {
       function()
         require("nvchad.renamer").open()
       end,
       "LSP rename",
     },
 
-    ["<leader>ca"] = {
+    ["<leader>la"] = {
       function()
         vim.lsp.buf.code_action()
       end,
       "LSP code action",
     },
 
-    ["gr"] = {
+    ["lr"] = {
       function()
         vim.lsp.buf.references()
       end,
@@ -199,6 +199,7 @@ M.lspconfig = {
       end,
       "Floating diagnostic",
     },
+    ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
 
     ["[d"] = {
       function()
@@ -272,23 +273,27 @@ M.telescope = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
-    ["<leader>ft"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-    ["<leader>bb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+    ["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
+    ["<leader>fk"] = { "<cmd> Telescope keymaps <CR>", "Find keymaps" },
+    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+    ["<leader>fw"] = { "<cmd> Telescope grep_string <CR>", "Find current Word" },
+    ["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "Find Diagnstics" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
-
-    -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
-
+    ["<leader>s/"] = {
+      function()
+        require("telescope.builtin").live_grep {
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        }
+      end,
+      "[S]earch [/] in Open Files",
+    },
     -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
+    ["<leader>fpt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
-    -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
-
-    ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
+    ["<leader>fma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
   },
 }
 
@@ -447,6 +452,8 @@ M.gitsigns = {
       end,
       "Blame line",
     },
+    ["<leader>gm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
     ["<leader>td"] = {
       function()

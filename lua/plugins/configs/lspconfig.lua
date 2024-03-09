@@ -96,7 +96,6 @@ local lspconfig = require "lspconfig"
 local servers = {
   "lua_ls",
   "jsonls",
-  "emmet_ls",
 }
 
 for _, server in pairs(servers) do
@@ -104,16 +103,13 @@ for _, server in pairs(servers) do
     on_attach = M.on_attach,
     capabilities = M.capabilities,
   }
-
   local require_ok, settings = pcall(require, "custom.configs.lspsettings." .. server)
   if require_ok then
     opts = vim.tbl_deep_extend("force", settings, opts)
   end
-
   if server == "lua_ls" then
     require("neodev").setup {}
   end
-
   lspconfig[server].setup(opts)
 end
 

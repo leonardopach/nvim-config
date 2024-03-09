@@ -1,7 +1,7 @@
 return {
   defaults = { lazy = false },
-  -- install = { colorscheme = { "nvchad" } },
-
+  install = { colorscheme = { "nvchad" } },
+  -- { import = "lazyvim.plugins.extras.lang.typescript" },
   ui = {
     icons = {
       ft = "",

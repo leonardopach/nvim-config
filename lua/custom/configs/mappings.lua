@@ -4,7 +4,7 @@ M.general = {
   n = {
     ["<c-a>"] = { "ggVG", "Select All" },
     ["x"] = { "_x>", "Delete" },
-    ["<leader>q"] = { ":q<CR>", "Quit" },
+    ["q"] = { ":q<CR>", "Quit" },
     ["n"] = { "nzz" },
     ["N"] = { "Nzz" },
     ["*"] = { "*zz" },
@@ -16,6 +16,8 @@ M.general = {
     ["<leader>an"] = { "<cmd>$tabnew<cr>", "New Empty Tab" },
     ["<tab>"] = { "<cmd>tabNext<cr>", "Next Tab" },
     ["<c-t>"] = { ":TodoTelescope<cr>", "Todo Telescope" },
+    ["<Esc>"] = { "<cmd>nohlsearch<CR>" },
+    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
   },
   i = {
     ["<c-a>"] = { "ggVG", "Select All" },
@@ -122,8 +124,6 @@ M.telescope_file = {
       end,
       "[S]earch [/] in Open Files",
     },
-    ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
   },
 }
 M.trouble = {
@@ -158,5 +158,16 @@ M.gitlinker = {
     ["<leader>gY"] = { "<cmd>GitLink blame<cr>", "Git link blame" },
   },
 }
-
+M.lspsaga = {
+  plugin = true,
+  n = {
+    ["F"] = { "<cmd>Lspsaga finder<CR>", "Finder" },
+  },
+  --   vim.keymap.set('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+  -- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
+  -- vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', opts)
+  -- vim.keymap.set('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>', opts)
+  -- vim.keymap.set('n', 'gp', '<Cmd>Lspsaga preview_definition<CR>', opts)
+  -- vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
+}
 return M

@@ -7,8 +7,9 @@ g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
-g.matchparen_timeout = 20
-g.matchparen_insert_timeout = 20
+-- g.matchparen_timeout = 20
+-- g.matchparen_insert_timeout = 20
+g.have_nerd_font = true
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
@@ -80,6 +81,24 @@ vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or "
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
+autocmd({ "BufWinEnter" }, {
+  callback = function()
+    vim.cmd "set formatoptions-=cro"
+  end,
+})
+autocmd({ "CursorHold" }, {
+  callback = function()
+    local status_ok, luasnip = pcall(require, "luasnip")
+    if not status_ok then
+      return
+    end
+    if luasnip.expand_or_jumpable() then
+      -- ask maintainer for option to make this silent
+      -- luasnip.unlink_current()
+      vim.cmd [[silent! lua require("luasnip").unlink_current()]]
+    end
+  end,
+})
 -- dont list quickfix buffers
 autocmd("FileType", {
   pattern = "qf",

@@ -1,22 +1,20 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
   {
-    "echasnovski/mini.notify",
-    version = false,
-    config = function()
-      require "custom.configs.notify"
-    end,
+    "j-hui/fidget.nvim",
+    opts = {
+      -- options
+    },
   },
-  -- clue
+  -- mini
   {
-    "echasnovski/mini.clue",
-    version = false,
+    "echasnovski/mini.nvim",
+    lazy = false,
     config = function()
-      require "custom.configs.miniclue"
+      require("mini.ai").setup { n_lines = 500 }
+      require("mini.surround").setup()
     end,
   },
-  --mini surround
-  { "echasnovski/mini.surround", version = false, opts = {} },
   { "b0o/schemastore.nvim" },
   -- rust
   {
@@ -30,6 +28,10 @@ local plugins = {
   --tsc
   {
     "dmmulroy/tsc.nvim",
+    lazy = false,
+    config = function()
+      require("tsc").setup()
+    end,
   },
   -- trouble
   {
@@ -177,15 +179,6 @@ local plugins = {
       require("core.utils").load_mappings "codeRunner"
     end,
   },
-  -- telescope-file-browser
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    config = function()
-      require "custom.configs.telescope_file"
-      require("core.utils").load_mappings "telescope_file"
-    end,
-  },
   -- debbug
   {
     "rcarriga/nvim-dap-ui",
@@ -268,6 +261,14 @@ local plugins = {
     lazy = false,
     opts = overrides.treesitter,
   },
+  -- lspsaga
+  {
+    "glepnir/lspsaga.nvim",
+    config = function()
+      require "custom.configs.lspsaga"
+      require("core.utils").load_mappings "lspsaga"
+    end,
+  },
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -299,7 +300,7 @@ local plugins = {
   {
     "windwp/nvim-ts-autotag",
     lazy = false,
-    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    ft = { "javascript" },
     config = function()
       require("nvim-ts-autotag").setup()
     end,

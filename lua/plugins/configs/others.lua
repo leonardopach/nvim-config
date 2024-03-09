@@ -33,7 +33,7 @@ M.luasnip = function(opts)
   require("luasnip").filetype_extend("typescriptreact", { "html" })
 
   -- vscode format
-  require("luasnip.loaders.from_vscode").lazy_load()
+  require("luasnip.loaders.from_vscode").lazy_load { exclude = { "typescriptreact", "rust" } }
   require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
 
   -- snipmate format
@@ -58,12 +58,12 @@ end
 
 M.gitsigns = {
   signs = {
-    add = { text = "│" },
-    change = { text = "│" },
-    delete = { text = "󰍵" },
+    add = { text = "+" },
+    change = { text = "~" },
+    delete = { text = "_" },
     topdelete = { text = "‾" },
     changedelete = { text = "~" },
-    untracked = { text = "│" },
+    untracked = { text = "●" },
   },
   on_attach = function(bufnr)
     utils.load_mappings("gitsigns", { buffer = bufnr })

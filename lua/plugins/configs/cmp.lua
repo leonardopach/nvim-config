@@ -1,5 +1,7 @@
 local cmp = require "cmp"
-
+-- require("cmp").config.formatting = {
+--   format = require("tailwindcss-colorizer-cmp").formatter,
+-- }
 dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
@@ -9,7 +11,6 @@ local field_arrangement = {
   atom = { "kind", "abbr", "menu" },
   atom_colored = { "kind", "abbr", "menu" },
 }
-
 local formatting_style = {
   -- default fields order i.e completion word + item.kind + item.kind icons
   fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
@@ -25,6 +26,11 @@ local formatting_style = {
       path = "",
       emoji = "",
     })[entry.source.name]
+
+    if entry.source.name == "emoji" then
+      item.kind = icons.Smiley
+      item.kind_hl_group = "CmpItemKindEmoji"
+    end
 
     if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
       local duplicates = {

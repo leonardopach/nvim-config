@@ -9,13 +9,7 @@ require("typescript-tools").setup {
   settings = {
     separate_diagnostic_server = true,
     publish_diagnostic_on = "insert_leave",
-    -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
-    -- "remove_unused_imports"|"organize_imports") -- or string "all"
-    -- to include all supported code actions
     expose_as_code_action = "all",
-    -- specify commands exposed as code_actions
-    -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
-    -- not exists then standard path resolution strategy is applied
     -- tsserver_plugins = {},
     tsserver_max_memory = "auto",
     -- complete_function_calls = true,
@@ -30,7 +24,7 @@ require("typescript-tools").setup {
       includeInlayParameterNameHints = "all", -- "none" | "literals" | "all";
       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
       includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHints = false,
       includeInlayVariableTypeHintsWhenTypeMatchesName = true,
       includeInlayPropertyDeclarationTypeHints = true,
       includeInlayFunctionLikeReturnTypeHints = true,
@@ -40,8 +34,11 @@ require("typescript-tools").setup {
       includeCompletionsForModuleExports = true,
       quotePreference = "auto",
 
-      -- autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
+      autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
     },
+    -- suggest = {
+    --   includeCompletionsForModuleExports = true,
+    -- },
     tsserver_format_options = {
       allowIncompleteCompletions = false,
       allowRenameOfImportPath = true,
