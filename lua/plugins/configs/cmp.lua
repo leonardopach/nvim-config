@@ -1,11 +1,6 @@
 local cmp = require "cmp"
 local luasnip = require "luasnip"
 
-require("luasnip/loaders/from_vscode").lazy_load()
-require("luasnip").filetype_extend("typescriptreact", { "html" })
-require("tailwindcss-colorizer-cmp").setup {
-  color_square_width = 2,
-}
 dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp

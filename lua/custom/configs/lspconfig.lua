@@ -10,7 +10,21 @@ local servers = {
   "jsonls",
   "yamlls",
 }
-lspconfig.tailwindcss.setup {}
+lspconfig.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    css = {
+      lint = {
+        validProperties = {},
+      },
+    },
+  },
+}
+lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 for _, lsp in pairs(servers) do
   local opts = {
     on_attach = on_attach,

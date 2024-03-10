@@ -1,5 +1,7 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+  { "chrisgrieser/nvim-spider", lazy = true },
+  -- fidget
   {
     "j-hui/fidget.nvim",
     opts = {

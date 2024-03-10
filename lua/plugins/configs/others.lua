@@ -2,7 +2,7 @@ local M = {}
 local utils = require "core.utils"
 
 M.blankline = {
-  indentLine_enabled = 1,
+  indentLine_enabled = 2,
   filetype_exclude = {
     "help",
     "terminal",
@@ -24,16 +24,19 @@ M.blankline = {
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 50 }
+    vim.highlight.on_yank { higroup = "Visual", timeout = 51 }
   end,
 })
 
 M.luasnip = function(opts)
   require("luasnip").config.set_config(opts)
   require("luasnip").filetype_extend("typescriptreact", { "html" })
+  require("tailwindcss-colorizer-cmp").setup {
+    color_square_width = 3,
+  }
 
   -- vscode format
-  require("luasnip.loaders.from_vscode").lazy_load { exclude = { "typescriptreact", "rust" } }
+  require("luasnip.loaders.from_vscode").lazy_load {}
   require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
 
   -- snipmate format

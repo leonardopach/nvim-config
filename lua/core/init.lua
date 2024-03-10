@@ -21,8 +21,14 @@ opt.path:append { "**" }
 opt.wildignore:append { "*/node_modules/*" }
 opt.termguicolors = true
 opt.list = true
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
+vim.opt.listchars = {
+  tab = "» ",
+  trail = "·",
+  precedes = "←",
+  extends = "→",
+  eol = "↲",
+  nbsp = "␣",
+}
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.guifont = "FiraCode:h17"
