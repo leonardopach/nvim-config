@@ -1,5 +1,38 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+  -- neotab
+  {
+    "kawre/neotab.nvim",
+    event = "InsertEnter",
+    opts = {
+      tabkey = "<Tab>",
+      act_as_tab = true,
+      behavior = "nested", ---@type ntab.behavior
+      pairs = { ---@type ntab.pair[]
+        { open = "(", close = ")" },
+        { open = "[", close = "]" },
+        { open = "{", close = "}" },
+        { open = "'", close = "'" },
+        { open = '"', close = '"' },
+        { open = "`", close = "`" },
+        { open = "<", close = ">" },
+      },
+      exclude = {},
+      smart_punctuators = {
+        enabled = false,
+        semicolon = {
+          enabled = false,
+          ft = { "cs", "c", "cpp", "java" },
+        },
+        escape = {
+          enabled = false,
+          triggers = {}, ---@type table<string, ntab.trigger>
+        },
+      },
+    },
+  },
+
+  -- spider
   { "chrisgrieser/nvim-spider", lazy = true },
   -- fidget
   {

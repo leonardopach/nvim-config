@@ -36,11 +36,11 @@ require("typescript-tools").setup {
 
       autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
     },
-    -- suggest = {
-    --   includeCompletionsForModuleExports = true,
-    -- },
+    suggest = {
+      includeCompletionsForModuleExports = true,
+    },
     tsserver_format_options = {
-      allowIncompleteCompletions = false,
+      allowIncompleteCompletions = true,
       allowRenameOfImportPath = true,
     },
     jsx_close_tag = {

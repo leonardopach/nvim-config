@@ -18,6 +18,7 @@ M.general = {
     ["<c-t>"] = { ":TodoTelescope<cr>", "Todo Telescope" },
     ["<Esc>"] = { "<cmd>nohlsearch<CR>" },
     ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+    ["<leader>v"] = { "<cmd>vsplit<CR>", "Split" },
   },
   i = {
     ["<c-a>"] = { "ggVG", "Select All" },
@@ -162,6 +163,7 @@ M.lspsaga = {
   plugin = true,
   n = {
     ["F"] = { "<cmd>Lspsaga finder<CR>", "Finder" },
+    ["<leader>lf"] = { "<cmd>Lspsaga peek_definition<CR>", "Peek Definition" },
   },
   --   vim.keymap.set('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
   -- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)

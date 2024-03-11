@@ -193,12 +193,6 @@ M.lspconfig = {
       "LSP references",
     },
 
-    ["<leader>lf"] = {
-      function()
-        vim.diagnostic.open_float { border = "rounded" }
-      end,
-      "Floating diagnostic",
-    },
     ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
 
     ["[d"] = {
@@ -347,7 +341,7 @@ M.nvterm = {
       "Toggle vertical term",
     },
 
-    ["<leader>v"] = {
+    ["<A-v>"] = {
       function()
         require("nvterm.terminal").new "vertical"
       end,

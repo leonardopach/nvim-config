@@ -35,7 +35,7 @@ local default_plugins = {
     config = function(_, opts)
       require("colorizer").setup {
         user_default_options = {
-          tailwind = true,
+          "*",
         },
       }
 
@@ -136,7 +136,7 @@ local default_plugins = {
       {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
-        -- dependencies = "rafamadriz/friendly-snippets",
+        dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("plugins.configs.others").luasnip(opts)
