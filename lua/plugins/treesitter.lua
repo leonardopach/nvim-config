@@ -1,13 +1,9 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile" },
+  cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
   build = ":TSUpdate",
-}
-
-function M.config()
-  local treesitter = require "nvim-treesitter.configs"
-
-  treesitter.setup {
+  opts = {
     autotag = {
       enable = true,
       enable_rename = true,
@@ -40,7 +36,7 @@ function M.config()
     auto_install = true,
     highlight = { enable = true },
     indent = { enable = true },
-  }
-end
+  },
+}
 
 return M

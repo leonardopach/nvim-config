@@ -13,7 +13,13 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  -- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  vim.keymap.set("n", "K", function()
+    local winid = require("ufo").peekFoldedLinesUnderCursor()
+    if not winid then
+      vim.lsp.buf.hover()
+    end
+  end)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
@@ -23,21 +29,38 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
-    -- vim.lsp.inlay_hint.enable(bufnr, true)
+    -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+    vim.lsp.inlay_hint.enable(bufnr, true)
   end
 end
-
-function M.common_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  return capabilities
-end
-
 M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
 end
+
+function M.common_capabilities()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = true,
+    lineFoldingOnly = true,
+  }
+
+  return capabilities
+end
+
 function M.config()
   local wk = require "which-key"
   wk.register {
@@ -49,8 +72,22 @@ function M.config()
     ["<leader>ln"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostic Float" },
     ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
     ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    ["<leader>lh"] = { "<cmd>lua require('plugins.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
     ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+    ["<leader>lh"] = { "<cmd>lua require('plugins.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
+    ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
+    ["[d"] = {
+      function()
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
+      end,
+      "Goto prev",
+    },
+
+    ["]d"] = {
+      function()
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
+      end,
+      "Goto next",
+    },
     ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
@@ -72,10 +109,10 @@ function M.config()
     "emmet_ls",
     "tailwindcss",
     "html",
-    "tsserver",
+    -- "tsserver",
     "clangd",
     "eslint",
-    "rust_analyzer",
+    -- "rust_analyzer",
     "pyright",
     "bashls",
     "jsonls",

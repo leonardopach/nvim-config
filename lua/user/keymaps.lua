@@ -17,12 +17,14 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<m-tab>", "<c-5>", opts)
 
+keymap("n", "q", ":q<CR>", opts)
 keymap("n", "n", "nzz", opts)
 keymap("n", "N", "Nzz", opts)
 keymap("n", "*", "*zz", opts)
 keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
+keymap("n","<c-t>", ":TodoTelescope<cr>", opts)
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)

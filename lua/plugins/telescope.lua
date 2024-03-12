@@ -15,6 +15,12 @@ function M.config()
   local wk = require "which-key"
   wk.register {
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=true<cr>", "Find" },
+    ["<leader>f?"] = {
+      function()
+        require("telescope.builtin").help_tags()
+      end,
+      "Helps Tags",
+    },
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
@@ -25,7 +31,28 @@ function M.config()
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
-    ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    ["<leader>fo"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    ["<leader>fd"] = {
+      function()
+        require("telescope.builtin").lsp_definitions()
+      end,
+      "Goto Definitions",
+    },
+    ["<leader>fr"] = {
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      "Goto References",
+    },
+    ["<leader>f/"] = {
+      function()
+        require("telescope.builtin").live_grep {
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        }
+      end,
+      "[S]earch [/] in Open Files",
+    },
   }
 
   -- local icons = require "user.icons"
@@ -38,7 +65,7 @@ function M.config()
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      path_display = { "smart" },
+      path_display = { "truncate" },
       color_devicons = true,
       vimgrep_arguments = {
         "rg",
@@ -51,6 +78,40 @@ function M.config()
         "--hidden",
         "--glob=!.git/",
       },
+      prompt_prefix = "   ",
+      selection_caret = "  ",
+      entry_prefix = "  ",
+      initial_mode = "insert",
+      -- path_display = { "smart" },
+      selection_strategy = "reset",
+      sorting_strategy = "ascending",
+      layout_strategy = "horizontal",
+      layout_config = {
+        horizontal = {
+          prompt_position = "top",
+          preview_width = 0.55,
+        },
+        vertical = {
+          mirror = false,
+        },
+        width = 0.87,
+        height = 0.80,
+        preview_cutoff = 120,
+      },
+      file_sorter = require("telescope.sorters").get_fuzzy_file,
+      file_ignore_patterns = { "node_modules" },
+      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+      path_display = { "truncate" },
+      winblend = 0,
+      border = {},
+      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      color_devicons = true,
+      set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+      -- Developer configurations: Not meant for general override
+      buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     },
     mappings = {
       i = {

@@ -16,7 +16,7 @@ function M.config()
       javascriptreact = { "prettier" },
       typescriptreact = { "prettier" },
       css = { "prettier" },
-      -- html = { "prettier" },
+      html = { "prettier" },
       json = { "prettier" },
       yaml = { "prettier" },
       markdown = { "prettier" },

@@ -1,4 +1,5 @@
 vim.opt.backup = false -- creates a backup file
+vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
@@ -9,6 +10,15 @@ vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.pumblend = 10
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "» ",
+  trail = "·",
+  precedes = "←",
+  extends = "→",
+  eol = "↲",
+  nbsp = "␣",
+}
 vim.opt.showmode = true -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 1 -- always show tabs
 vim.opt.smartcase = true -- smart case
@@ -36,14 +46,12 @@ vim.opt.wrap = false -- display lines as one long line
 vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
-vim.opt.title = false
--- colorcolumn = "80",
--- colorcolumn = "120",
+vim.opt.title = true
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
 }
-
+vim.opt.titlelen = 0 -- do not shorten title
 vim.opt.shortmess:append "c"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"

@@ -3,21 +3,29 @@ local M = {
   dependencies = {
     "williamboman/mason.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "nvim-lua/plenary.nvim",
   },
 }
 
 function M.config()
+  local wk = require "which-key"
+  wk.register {
+    ["<leader>lI"] = { "<cmd>Mason<cr>", "Mason Info" },
+  }
   local servers = {
     "lua_ls",
     "cssls",
     "html",
-    "eslint",
-    "gopls",
-    "clangd",
     "tsserver",
+    "astro",
     "pyright",
     "bashls",
     "jsonls",
+    "yamlls",
+    "marksman",
+    "tailwindcss",
+    "rust_analyzer",
+    "eslint",
   }
 
   require("mason").setup {

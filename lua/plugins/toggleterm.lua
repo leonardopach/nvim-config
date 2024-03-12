@@ -5,9 +5,9 @@ local M = {
 
 function M.config()
   local execs = {
-    { nil, "<C-1>", "Horizontal Terminal", "horizontal", 0.3 },
-    { nil, "<C-2>", "Vertical Terminal", "vertical", 0.4 },
-    { nil, "<C-3>", "Float Terminal", "float", nil },
+    { nil, "<A-q>", "Horizontal Terminal", "horizontal", 0.3 },
+    { nil, "<A-w>", "Vertical Terminal", "vertical", 0.4 },
+    { nil, "<A-e>", "Float Terminal", "float", nil },
   }
 
   local function get_buf_size()
