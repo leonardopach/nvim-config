@@ -139,7 +139,9 @@ local default_plugins = {
         dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
+          -- require("plugins.configs.others").luasnip(opts)
+          require("luasnip").config.set_config(opts)
+          require "plugins.configs.luasnip"
         end,
       },
 

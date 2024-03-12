@@ -36,6 +36,7 @@ opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.relativenumber = true
 opt.sidescrolloff = 8
+opt.shortmess:append "sI"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 
@@ -76,14 +77,16 @@ opt.whichwrap:append "<>[]hl"
 g.mapleader = " "
 
 -- disable some default providers
-for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
-  vim.g["loaded_" .. provider .. "_provider"] = 0
-end
-
+-- for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
+--   vim.g["loaded_" .. provider .. "_provider"] = 0
+-- end
+--
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
-vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
+-- local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+-- vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
+local is_windows = vim.fn.has "win32" ~= 0
+vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
