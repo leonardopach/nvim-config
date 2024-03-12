@@ -1,35 +1,19 @@
-local configs = require "plugins.configs.lspconfig"
-local on_attach = configs.on_attach
-local capabilities = configs.capabilities
-
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
+
 local servers = {
   "clangd",
   "pyright",
   "bashls",
   "jsonls",
   "yamlls",
-}
-lspconfig.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    css = {
-      lint = {
-        validProperties = {},
-      },
-    },
-  },
-}
-lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+  "tailwindcss",
+  "eslint",
 }
 for _, lsp in pairs(servers) do
-  local opts = {
+  lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
-
-  lspconfig[lsp].setup(opts)
 end
