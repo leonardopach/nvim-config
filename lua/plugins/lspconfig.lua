@@ -27,6 +27,7 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
+  -- require("tailwindcss-colors").buf_attach(bufnr)
   if client.supports_method "textDocument/inlayHint" then
     -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
     vim.lsp.inlay_hint.enable(bufnr, true)
@@ -114,10 +115,10 @@ function M.config()
 
   local servers = {
     "lua_ls",
-    -- "cssls",
+    "cssls",
     -- "emmet_ls",
     "tailwindcss",
-    -- "html",
+    "html",
     "clangd",
     "eslint",
     "pyright",
@@ -169,6 +170,14 @@ function M.config()
     local require_ok, settings = pcall(require, "plugins.lspsettings." .. server)
     if require_ok then
       opts = vim.tbl_deep_extend("force", settings, opts)
+    end
+
+    if server == "tailwindcss" then
+      -- warp the attach function
+      opts.on_attach = function(_, bufnr)
+        require("tailwindcss-colors").buf_attach(bufnr)
+        M.on_attach(_, bufnr)
+      end
     end
 
     if server == "lua_ls" then

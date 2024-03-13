@@ -14,9 +14,10 @@ function M.config()
       "html",
       "astro",
       "lua",
+      "*",
     },
     user_default_options = {
-      names = false,
+      names = true,
       rgb_fn = true,
       hsl_fn = true,
       "*",

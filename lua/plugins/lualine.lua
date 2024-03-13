@@ -3,7 +3,7 @@ local M = {
 }
 
 function M.config()
-  local theme = require "lualine.themes.catppuccin-mocha"
+  local theme = require "lualine.themes.solarized_dark"
 
   -- set bg transparency in all modes
   -- theme.normal.c.bg = nil
