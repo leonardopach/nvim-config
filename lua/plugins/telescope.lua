@@ -24,13 +24,16 @@ function M.config()
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
     ["<leader>fh"] = {
       "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
       "open with the path of current buffer",
     },
+    ["<leader>fk"] = { "<cmd> Telescope keymaps <CR>", "Find keymaps" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
     ["<leader>fo"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fd"] = {
       function()

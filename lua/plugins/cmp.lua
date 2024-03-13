@@ -167,7 +167,6 @@ function M.config()
           for word in string.gmatch(vim_item.word, "[^-]+") do
             table.insert(words, word)
           end
-
           local color_name, color_number
           if
             words[2] == "x"
@@ -232,8 +231,9 @@ function M.config()
           -- make the color square 2 chars wide
           vim_item.kind = string.rep("▣", 1)
 
-          -- return vim_item
+          return vim_item
         end
+
         if entry.source.name == "crates" then
           vim_item.kind = icons.misc.Package
           vim_item.kind_hl_group = "CmpItemKindCrate"
@@ -253,7 +253,6 @@ function M.config()
       end,
     },
     sources = {
-      { name = "copilot" },
       {
         name = "nvim_lsp",
         entry_filter = function(entry, ctx)
@@ -274,7 +273,6 @@ function M.config()
         end,
       },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
@@ -283,6 +281,7 @@ function M.config()
       { name = "treesitter" },
       { name = "crates" },
       { name = "tmux" },
+      { name = "cmp_tabnine" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

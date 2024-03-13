@@ -1,5 +1,6 @@
 local M = {
   "j-hui/fidget.nvim",
+  tag = "v1.0.0",
 }
 
 function M.config()
@@ -9,7 +10,6 @@ function M.config()
         enable = true,
       },
     },
-
     notification = {
       window = {
         normal_hl = "CursorLineNr", -- Base highlight group in the notification window

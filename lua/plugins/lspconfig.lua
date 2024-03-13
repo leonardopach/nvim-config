@@ -13,7 +13,6 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  -- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   vim.keymap.set("n", "K", function()
     local winid = require("ufo").peekFoldedLinesUnderCursor()
     if not winid then
@@ -31,6 +30,7 @@ M.on_attach = function(client, bufnr)
   if client.supports_method "textDocument/inlayHint" then
     -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
     vim.lsp.inlay_hint.enable(bufnr, true)
+    vim.api.nvim_set_hl(0, "LSPInlayHint", { fg = "grey" })
   end
 end
 M.toggle_inlay_hints = function()
@@ -47,10 +47,19 @@ function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+    documentationFormat = { "markdown", "plaintext" },
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
     },
   }
   capabilities.textDocument.foldingRange = {
@@ -105,14 +114,12 @@ function M.config()
 
   local servers = {
     "lua_ls",
-    "cssls",
-    "emmet_ls",
+    -- "cssls",
+    -- "emmet_ls",
     "tailwindcss",
-    "html",
-    -- "tsserver",
+    -- "html",
     "clangd",
     "eslint",
-    -- "rust_analyzer",
     "pyright",
     "bashls",
     "jsonls",
@@ -129,7 +136,7 @@ function M.config()
         { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
       },
     },
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = false,
     underline = true,
     severity_sort = true,
