@@ -27,9 +27,7 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
-  -- require("tailwindcss-colors").buf_attach(bufnr)
   if client.supports_method "textDocument/inlayHint" then
-    -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
     vim.lsp.inlay_hint.enable(bufnr, true)
     vim.api.nvim_set_hl(0, "LSPInlayHint", { fg = "grey" })
   end
@@ -74,16 +72,7 @@ end
 function M.config()
   local wk = require "which-key"
   wk.register {
-    ["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    ["<leader>lf"] = {
-      "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-      "Format",
-    },
-    ["<leader>ln"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostic Float" },
     ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
-    ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
-    ["<leader>lh"] = { "<cmd>lua require('plugins.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
     ["<leader>lo"] = { "<cmd>TSToolsOrganizeImports<cr>", "Organizar Importe JS" },
     ["[d"] = {
       function()
@@ -91,7 +80,6 @@ function M.config()
       end,
       "Goto prev",
     },
-
     ["]d"] = {
       function()
         vim.diagnostic.goto_next { float = { border = "rounded" } }
@@ -101,13 +89,6 @@ function M.config()
     ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-  }
-
-  wk.register {
-    ["<leader>la"] = {
-      name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-    },
   }
 
   local lspconfig = require "lspconfig"
