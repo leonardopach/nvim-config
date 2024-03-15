@@ -13,6 +13,9 @@ end, { desc = "File Format with conform" })
 
 map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 
+--flash
+map("n", "f", "<cmd>lua require('flash').jump()<cr>", { desc = "Flash" })
+
 -- tmux
 map("n", "<C-h>", "<cmd>lua require('tmux').move_left()<cr>", opts)
 map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", opts)
