@@ -75,6 +75,7 @@ return {
         ["<leader>t"] = { name = "[T]est", _ = "which_key_ignore" },
         ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
         ["<leader>l"] = { name = "[L]sp", _ = "which_key_ignore" },
+        ["<leader>z"] = { name = "[Z]en", _ = "which_key_ignore" },
         ["<c-t>"] = { name = "[T]odo", _ = "which_key_ignore" },
       }
     end,

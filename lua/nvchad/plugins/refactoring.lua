@@ -1,13 +1,28 @@
 return {
   "ThePrimeagen/refactoring.nvim",
   lazy = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
+  keys = {
+    {
+      "<leader>r",
+      function()
+        require("refactoring").select_refactor {
+          show_success_message = true,
+        }
+      end,
+      mode = "v",
+      noremap = true,
+      silent = true,
+      expr = false,
+    },
   },
-  config = function()
-    require("refactoring").setup {
-      show_success_message = false,
-    }
-  end,
+  opts = {
+    prompt_func_return_type = {
+      javascript = true,
+      typescript = true,
+    },
+    prompt_func_param_type = {
+      javascript = true,
+      typescript = true,
+    },
+  },
 }

@@ -13,9 +13,9 @@ end, { desc = "File Format with conform" })
 
 map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 
---flash
-map("n", "f", "<cmd>lua require('flash').jump()<cr>", { desc = "Flash" })
-
+-- debuug
+map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "Add breakpoint at line" })
+map("n", "<leader>dr", "<cmd> DapContinue <CR>", { desc = "Run or continue the debugger" })
 -- tmux
 map("n", "<C-h>", "<cmd>lua require('tmux').move_left()<cr>", opts)
 map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", opts)

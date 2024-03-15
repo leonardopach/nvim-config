@@ -1,7 +1,7 @@
 return {
   defaults = { lazy = false },
 
-  install = { colorscheme = { "rosepine" }, priority = 1000 },
+  -- install = {},
   ui = {
     icons = {
       ft = "",
