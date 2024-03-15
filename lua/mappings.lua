@@ -6,6 +6,8 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<c-a>", "ggVG", { desc = "Select All" })
+map("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "Split" })
+map("n", "<leader>an", "<cmd>$tabnew<cr>", { desc = "New Empty Tab" })
 
 map("n", "<leader>fm", function()
   require("conform").format()

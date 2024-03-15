@@ -52,6 +52,7 @@ return {
       "jsonc",
       "lua",
       "luadoc",
+      "css",
       "luap",
       "markdown",
       "markdown_inline",

@@ -2,9 +2,10 @@ local options = {
   ensure_installed = {
     "lua-language-server",
     "stylua",
-    "selene",
+    "js-debug-adapter",
     "shellcheck",
     "shfmt",
+    "json-lsp",
     "html-lsp",
     "eslint-lsp",
     "tailwindcss-language-server",

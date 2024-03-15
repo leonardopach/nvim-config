@@ -11,6 +11,7 @@ local servers = {
   "cssls",
   "html",
   "clangd",
+  "tsserver",
   "tailwindcss",
   "eslint",
   "pyright",
