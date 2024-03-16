@@ -44,13 +44,21 @@ return { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
+
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
         -- NOTE: Remember that lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself
         -- many times.
-        --
+
+        if vim.lsp.inlay_hint.enable then
+          vim.keymap.set("n", "<leader>uh", function()
+            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+          end)
+          -- vim.lsp.inlay_hint.enable(0, true)
+        end
+
         -- In this case, we create a function that lets us more easily define mappings specific
         -- for LSP related items. It sets the mode, buffer and description for us each time.
         local map = function(keys, func, desc)
@@ -145,7 +153,8 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {},
+      html = { filetypes = { "html", "twig", "hbs" } },
+      cssls = {},
       lua_ls = {
         -- cmd = {...},
         -- filetypes { ...},
@@ -172,7 +181,7 @@ return { -- LSP Configuration & Plugins
               },
             },
             hint = {
-              enable = true,
+              enable = false,
               arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
               await = true,
               paramName = "All", -- "All" | "Literal" | "Disable"
@@ -188,12 +197,6 @@ return { -- LSP Configuration & Plugins
       },
     }
 
-    -- Ensure the servers and tools above are installed
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
-    --    :Mason
-    --
-    --  You can press `g?` for help in this menu
     require("mason").setup()
 
     -- You can add other tools here that you want Mason to install
@@ -201,7 +204,7 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format lua code
-      "tsserver",
+      -- "tsserver",
       "html-lsp",
       "css-lsp",
     })
@@ -213,7 +216,6 @@ return { -- LSP Configuration & Plugins
           local server = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,

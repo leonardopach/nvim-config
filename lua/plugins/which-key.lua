@@ -16,6 +16,7 @@ return { -- Useful plugin to show you pending keybinds.
       ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
       ["<leader>t"] = { name = "[T]esting", _ = "which_key_ignore" },
       ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+      ["<leader>u"] = { name = "[I]nlayHints", _ = "which_key_ignore" },
       ["<leader>z"] = { name = "[Z]enmode", _ = "which_key_ignore" },
     }
   end,
