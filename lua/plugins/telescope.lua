@@ -12,7 +12,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       end,
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
-
+    { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   config = function()
@@ -42,6 +42,49 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
+        entry_prefix = "   ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        color_devicons = true,
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+          "--glob=!.git/",
+        },
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+          },
+          vertical = {
+            mirror = false,
+          },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
+        },
+        file_ignore_patterns = { "node_modules", ".git" },
+        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+        path_display = { "truncate" },
+        winblend = 0,
+        border = {},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+        qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+        -- Developer configurations: Not meant for general override
+        buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
         mappings = {
           i = { ["<c-enter>"] = "to_fuzzy_refine" },
         },
@@ -61,6 +104,19 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- See `:help telescope.builtin`
     local builtin = require "telescope.builtin"
     vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+    vim.keymap.set(
+      "n",
+      "<leader>sa",
+      "<cmd>Telescope find_files follow=true no_ignore=true hidden=true <CR>",
+      { desc = "[S]earch [A]ll" }
+    )
+    vim.keymap.set("n", "<leader>sc", builtin.colorscheme, { desc = "[S]earch [C]olorschem" })
+    vim.keymap.set(
+      "n",
+      "<leader>sb",
+      "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
+      { desc = "[S]earch [B]rowser" }
+    )
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
     vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
     vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
