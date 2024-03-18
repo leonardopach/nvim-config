@@ -1,5 +1,7 @@
 local overrides = require "custom.configs.overrides"
 local plugins = {
+
+  { "nvim-neotest/nvim-nio" },
   -- neotab
   {
     "kawre/neotab.nvim",
