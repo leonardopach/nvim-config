@@ -42,7 +42,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
-        entry_prefix = "   ",
+        entry_prefix = " ",
         initial_mode = "insert",
         selection_strategy = "reset",
         color_devicons = true,

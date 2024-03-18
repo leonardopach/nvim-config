@@ -9,6 +9,7 @@ return {
     local wk = require "which-key"
     wk.register {
       ["F"] = { "<cmd>Lspsaga finder<CR>", "Finder" },
+      ["K"] = { "<cmd>Lspsaga hover_doc<CR>" },
       ["<leader>lf"] = { "<cmd>Lspsaga peek_definition<CR>", "Peek Definition" },
     }
     saga.setup {

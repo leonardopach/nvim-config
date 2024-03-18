@@ -100,7 +100,7 @@ return { -- LSP Configuration & Plugins
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        -- map("K", vim.lsp.buf.hover, "Hover Documentation")
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header
@@ -116,6 +116,7 @@ return { -- LSP Configuration & Plugins
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
             callback = vim.lsp.buf.document_highlight,
+            -- callback = vim.lsp.buf.hover,
           })
 
           vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
@@ -197,10 +198,43 @@ return { -- LSP Configuration & Plugins
       },
     }
 
-    require("mason").setup()
+    local icons = require "users.icons"
+    local default_diagnostic_config = {
+      signs = {
+        active = true,
+        values = {
+          { name = "DiagnosticSignError", text = icons.diagnostics.Error },
+          { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+          { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+          { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        },
+      },
+      virtual_text = false,
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        focusable = true,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
+    }
 
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
+    vim.diagnostic.config(default_diagnostic_config)
+
+    for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+    end
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    require("lspconfig.ui.windows").default_options.border = "rounded"
+
+    require("mason").setup()
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format lua code
@@ -214,8 +248,6 @@ return { -- LSP Configuration & Plugins
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,

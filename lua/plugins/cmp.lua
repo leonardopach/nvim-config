@@ -100,6 +100,36 @@ return { -- Autocompletion
         { name = "buffer" },
         { name = "path" },
       },
+      confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false,
+      },
+      view = {
+        entries = {
+          name = "custom",
+          selection_order = "top_down",
+        },
+        docs = {
+          auto_open = true,
+        },
+      },
+      window = {
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+          col_offset = -3,
+          side_padding = 1,
+          scrollbar = false,
+          scrolloff = 8,
+        },
+        documentation = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
+        },
+      },
+      experimental = {
+        ghost_text = false,
+      },
     }
   end,
 }
