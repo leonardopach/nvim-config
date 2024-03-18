@@ -239,6 +239,8 @@ return { -- LSP Configuration & Plugins
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format lua code
       -- "tsserver",
+      "js-debug-adapter",
+      "eslint-lsp",
       "html-lsp",
       "css-lsp",
     })
