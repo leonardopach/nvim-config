@@ -7,9 +7,9 @@ return {
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
 
-        if vim.lsp.inlay_hint.enable then
-          vim.lsp.inlay_hint.enable(bufnr, true)
-        end
+        -- if vim.lsp.inlay_hint.enable then
+        --   vim.lsp.inlay_hint.enable(bufnr, true)
+        -- end
       end,
       settings = {
         tsserver_file_preferences = {

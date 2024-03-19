@@ -37,8 +37,8 @@ return { -- Autocompletion
     -- See `:help cmp`
     local cmp = require "cmp"
     local luasnip = require "luasnip"
-    luasnip.config.setup {}
     require("luasnip").filetype_extend("typescriptreact", { "html" })
+    luasnip.config.setup {}
     cmp.setup {
       snippet = {
         expand = function(args)

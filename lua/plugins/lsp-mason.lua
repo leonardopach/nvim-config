@@ -241,6 +241,8 @@ return { -- LSP Configuration & Plugins
       -- "tsserver",
       "js-debug-adapter",
       "eslint-lsp",
+      "prettier",
+      "prettierd",
       "html-lsp",
       "css-lsp",
     })

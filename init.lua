@@ -37,4 +37,7 @@ spec "plugins.visual-multi"
 spec "plugins.telescope-tabs"
 spec "plugins.zenmode"
 spec "plugins.illuminate"
+-- extras
+spec "plugins.extra.lab"
+spec "plugins.extra.flash"
 require "users.lazy"
