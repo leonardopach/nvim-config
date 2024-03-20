@@ -92,7 +92,7 @@ return { -- LSP Configuration & Plugins
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("<leader>lr", vim.lsp.buf.rename, "[R]e[n]ame")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
@@ -154,7 +154,7 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {},
+      -- tsserver = {},
       html = { filetypes = { "html", "twig", "hbs" } },
       cssls = {},
       lua_ls = {
@@ -239,7 +239,7 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format lua code
-      "tsserver",
+      -- "tsserver",
       "js-debug-adapter",
       "eslint-lsp",
       "prettier",

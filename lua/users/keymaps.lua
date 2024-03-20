@@ -4,7 +4,7 @@ vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<c-a>", "ggVG", { desc = "select all" })
-vim.keymap.set("n", "<C-s>", "<cmd>w<cr>", opts)
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>w<cr>", opts)
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<cr>", opts)
 vim.keymap.set("n", "q", ":q<CR>", opts)
 vim.keymap.set("n", "n", "nzz", opts)
