@@ -5,8 +5,6 @@ return { -- LSP Configuration & Plugins
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-    -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { "j-hui/fidget.nvim", opts = {} },
 
@@ -155,6 +153,7 @@ return { -- LSP Configuration & Plugins
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
+      bashls = {},
       html = { filetypes = { "html", "twig", "hbs" } },
       cssls = {},
       lua_ls = {
