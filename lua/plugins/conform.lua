@@ -16,7 +16,7 @@ return { -- Autoformat
       lua = { "stylua" },
       c = { "clang-format" },
       javascript = { "prettier" },
-      typescript = { "eslint" },
+      typescript = { { "prettier", "eslint" } },
       javascriptreact = { "prettier" },
       typescriptreact = { "prettier" },
       css = { "prettier" },

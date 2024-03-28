@@ -11,6 +11,7 @@ return { -- Useful plugin to show you pending keybinds.
       ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
       ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
       ["<leader>l"] = { name = "[L]spsaga/[T]odo", _ = "which_key_ignore" },
+      ["<leader>g"] = { name = "[N]eogit", _ = "which_key_ignore" },
       ["<leader>p"] = { name = "[E]x", _ = "which_key_ignore" },
       ["<leader>o"] = { name = "[N]avbuddy", _ = "which_key_ignore" },
       ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },

@@ -1,4 +1,4 @@
-return { -- LSP Configuration & Plugins
+return { -- LSP Configuration & Pluginslsp-mason
   "neovim/nvim-lspconfig",
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for neovim
@@ -53,6 +53,7 @@ return { -- LSP Configuration & Plugins
         if vim.lsp.inlay_hint.enable then
           vim.keymap.set("n", "<leader>uh", function()
             vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+            vim.api.nvim_set_hl(0, "LSPInlayHint", { fg = "grey" })
           end)
           -- vim.lsp.inlay_hint.enable(0, true)
         end
@@ -145,7 +146,7 @@ return { -- LSP Configuration & Plugins
       -- clangd = {},
       -- gopls = {},
       -- pyright = {},
-      -- rust_analyzer = {},
+      rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
